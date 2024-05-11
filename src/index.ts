@@ -5,7 +5,7 @@
  * @Last Modified time: 2024-05-11 10:33:20
  */
 import { App, DirectiveBinding, onMounted, onUnmounted } from 'vue'
-type VisualizeAnimateValue = { ani: string; duration?: number; hook?: string; delay?: number }
+export declare type VisualizeAnimateValue = { ani: string; duration?: number; hook?: string; delay?: number }
 const animationClassName = 'animate'
 
 export default {
