@@ -1,46 +1,48 @@
-import { onMounted as c, onUnmounted as i } from "vue";
-const o = "animate", u = {
+import { onMounted as i, onUnmounted as d } from "vue";
+const c = "animate", m = {
   isInstalled: !1,
-  install(s) {
-    this.isInstalled = !0, s.directive("animate", {
-      mounted(l, t) {
+  install(a) {
+    this.isInstalled = !0;
+    const o = {
+      mounted(s, t) {
         if (!t.value.ani)
           return;
-        l.classList.add(o), l.dataset.ani = t.value.ani, t.value.delay && (l.dataset.delay = t.value.delay);
-        const n = `
+        s.classList.add(c), s.dataset.ani = t.value.ani, t.value.delay && (s.dataset.delay = String(t.value.delay));
+        const e = `
           .${t.value.ani} {
             animation: ${t.value.ani} ${t.value.duration || 2}s ${t.value.hook || "ease-in"};
           }
-        `, e = document.querySelector("style.v-animate");
-        if (e)
-          e.innerHTML += n;
+        `, n = document.querySelector("style.v-animate");
+        if (n)
+          n.innerHTML += e;
         else {
-          const a = document.createElement("style");
-          a.setAttribute("class", "v-animate"), a.innerHTML = n, document.head.appendChild(a);
+          const l = document.createElement("style");
+          l.setAttribute("class", "v-animate"), l.innerHTML = e, document.head.appendChild(l);
         }
       }
-    });
+    };
+    a.directive("animate", o);
   }
-}, m = () => {
-  const s = () => {
-    const l = document.documentElement.scrollTop || document.body.scrollTop, t = document.documentElement.clientHeight, n = document.querySelectorAll(`.${o}`);
-    Array.from(n).forEach((e) => {
-      if (l + t > e.offsetTop) {
-        const a = e.dataset.delay;
-        a ? setTimeout(() => {
+}, u = () => {
+  const a = () => {
+    const o = document.documentElement.scrollTop || document.body.scrollTop, s = document.documentElement.clientHeight, t = document.querySelectorAll(`.${c}`);
+    Array.from(t).forEach((e) => {
+      if (o + s > e.offsetTop) {
+        const n = e.dataset.delay;
+        n ? setTimeout(() => {
           e.style.opacity = 1, e.classList.add(e.dataset.ani);
-        }, a) : (e.style.opacity = 1, e.classList.add(e.dataset.ani));
+        }, n) : (e.style.opacity = 1, e.classList.add(e.dataset.ani));
       } else
         e.classList.remove(e.dataset.ani), e.style.opacity = 0;
     });
   };
-  c(() => {
-    s(), addEventListener("scroll", s);
-  }), i(() => {
-    removeEventListener("scroll", s);
+  i(() => {
+    a(), addEventListener("scroll", a);
+  }), d(() => {
+    removeEventListener("scroll", a);
   });
 };
 export {
-  u as default,
-  m as useVisualizeAnimate
+  m as default,
+  u as useVisualizeAnimate
 };

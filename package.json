@@ -1,6 +1,6 @@
 {
   "name": "visualize-animate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Visual range animation plug-in used in vue, based on animate.css",
   "module": "dist/index.js",
   "type": "module",

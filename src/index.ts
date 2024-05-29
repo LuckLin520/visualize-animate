@@ -4,21 +4,22 @@
  * @Date: 2024-05-10 12:51:47 
  * @Last Modified time: 2024-05-11 10:33:20
  */
-import { App, DirectiveBinding, onMounted, onUnmounted } from 'vue'
+import { App, Directive, DirectiveBinding, onMounted, onUnmounted } from 'vue'
 export declare type VisualizeAnimateValue = { ani: string; duration?: number; hook?: string; delay?: number }
+export declare type VisualizeAnimate = Directive<HTMLElement, VisualizeAnimateValue>
 const animationClassName = 'animate'
 
 export default {
   isInstalled: false,
   install(app: App) {
     this.isInstalled = true
-    app.directive('animate', {
-      mounted(el, binding: DirectiveBinding<VisualizeAnimateValue>) {
+    const myDirective: VisualizeAnimate = {
+      mounted(el, binding) {
         if (!binding.value.ani) return
         el.classList.add(animationClassName)
         el.dataset.ani = binding.value.ani
         if (binding.value.delay) {
-          el.dataset.delay = binding.value.delay
+          el.dataset.delay = String(binding.value.delay)
         }
         // demo: https://animate.style/
         // core: https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
@@ -37,7 +38,8 @@ export default {
           document.head.appendChild(newStyle)
         }
       }
-    })
+    }
+    app.directive('animate', myDirective)
   }
 }
 
