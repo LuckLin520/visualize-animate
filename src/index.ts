@@ -4,7 +4,7 @@
  * @Date: 2024-05-10 12:51:47 
  * @Last Modified time: 2024-05-11 10:33:20
  */
-import { App, Directive, DirectiveBinding, onMounted, onUnmounted } from 'vue'
+import { App, Directive, onMounted, onUnmounted } from 'vue'
 export declare type VisualizeAnimateValue = { ani: string; duration?: number; hook?: string; delay?: number }
 export declare type VisualizeAnimate = Directive<HTMLElement, VisualizeAnimateValue>
 const animationClassName = 'animate'
